@@ -1,0 +1,2 @@
+jdcal==1.0
+openpyxl==2.2.6
