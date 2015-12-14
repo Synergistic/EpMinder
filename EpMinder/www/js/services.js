@@ -194,6 +194,9 @@ angular.module('starter.services', [])
         all: function () {
             return RetrieveFaves();
         },
+        exists: function(showToCheck){
+            return ExistsInStorage(showToCheck.name);
+        },
         add: function (newFave) {
             if (ExistsInStorage(newFave.name)) {
                 RemoveDataFromLocalStorage(newFave.name);

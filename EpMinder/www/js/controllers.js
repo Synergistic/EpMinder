@@ -48,6 +48,10 @@ angular.module('starter.controllers', [])
         Favorites.add($stateParams.show);
         //Need to flip star icon to filled and change text to "Remove from Favorites"
     };
+
+    $scope.InFavorites = function () {
+        return Favorites.exists($stateParams.show);
+    };
 })
 
 .controller('EpisodeDetailCtrl', function ($scope, $stateParams, Episodes)

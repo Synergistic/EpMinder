@@ -9,6 +9,11 @@
     </ion-list>
   </ion-content>
     <ion-footer-bar align-title="left" class="bar-dark">
-        <a class="icon favorite ion-android-star-outline" href="#" ng-model="show" ng-click="addToFavorites()"></a><span>Add to Favorites</span>
+        <any ng-if="InFavorites()">
+            <a class="icon favorite ion-android-star" href="#" ng-click="addToFavorites()"></a><span>Remove from Favorites</span>
+        </any>
+        <any ng-if="!InFavorites()">
+            <a class="icon favorite ion-android-star-outline" href="#" ng-click="addToFavorites()"></a><span>Add to Favorites</span>
+        </any>
     </ion-footer-bar>
 </ion-view>
