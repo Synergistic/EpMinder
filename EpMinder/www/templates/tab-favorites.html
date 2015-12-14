@@ -1,0 +1,12 @@
+<ion-view view-title="EpMinder">
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="show in shows" type="item-text-wrap" ng-click="GetEpisodesForFaves(show)">
+                <img ng-src="{{show.image}}">
+                <h2>{{show.name}}</h2>
+                <p>{{show.network}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

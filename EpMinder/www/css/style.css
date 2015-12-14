@@ -1,0 +1,38 @@
+/* Empty. Add your own CSS if you like */
+.item .item-content {
+  background-color: #444;
+}
+
+.item-content h2 {
+    font-weight: bold;
+    color: white;
+}
+
+.item-content p {
+    color: white;
+}
+.bar {
+    background-color: #444;
+    color: white;
+}
+
+.padding {
+    background-color: #444;
+}
+
+
+.favorite { 
+    color: orange;
+    top: 15px;
+    left: 15px;
+    font-size: 36px;
+    max-width: 40px;
+    max-height: 40px;
+    width: 100%;
+    border-radius: 4px;
+}
+ion-footer-bar {
+  height: 40px;
+  font-size: 1.5em;
+  line-height: 40px;
+}

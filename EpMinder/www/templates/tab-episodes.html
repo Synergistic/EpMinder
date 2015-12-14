@@ -1,0 +1,14 @@
+<ion-view view-title="Episodes">
+  <ion-content class="padding">
+    <ion-list>
+        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="episode in episodes" type="item-text-wrap" href="#/tab/episodes/{{episode.id}}">
+            <h2>{{episode.name}}</h2>
+            <p>{{episode.airdate}}</p>
+            <p>{{episode.showId}}</p>
+        </ion-item>
+    </ion-list>
+  </ion-content>
+    <ion-footer-bar align-title="left" class="bar-dark">
+        <a class="icon favorite ion-android-star-outline" href="#" ng-model="show" ng-click="addToFavorites()"></a><span>Add to Favorites</span>
+    </ion-footer-bar>
+</ion-view>
