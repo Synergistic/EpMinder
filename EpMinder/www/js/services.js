@@ -139,11 +139,11 @@ angular.module('starter.services', [])
         favesList = JSON.parse(window.localStorage['favesList']);
 
         // Push the new data (whether it be an object or anything else) onto the array
-        favesList.push(data.name);
+        favesList.push(data.name + data.country);
 
         // Re-serialize the array back into a string and store it in localStorage
         window.localStorage['favesList'] = JSON.stringify(favesList);
-        window.localStorage[data.name] = JSON.stringify(data);
+        window.localStorage[data.name + data.country] = JSON.stringify(data);
     };
 
     function RetrieveFaves() {
@@ -160,13 +160,12 @@ angular.module('starter.services', [])
         return favesObjs;
     };
 
-    function RemoveDataFromLocalStorage(nameToRemove) {
+    function RemoveDataFromLocalStorage(f) {
         var favesList = [];
 
         favesList = JSON.parse(window.localStorage['favesList']);
         for (var i = 0; i < favesList.length; i++) {
-            if (favesList[i] == nameToRemove) {
-                //already here
+            if (favesList[i] == (f.name + f.country)) {
                 favesList.splice(i, 1);
             }
         }
@@ -175,14 +174,14 @@ angular.module('starter.services', [])
         window.localStorage['favesList'] = JSON.stringify(favesList);
     };
 
-    function ExistsInStorage(nameToCheck) {
+    function ExistsInStorage(f) {
 
         var favesList = [];
 
         favesList = JSON.parse(window.localStorage['favesList']);
 
         for (var i = 0; i < favesList.length; i++) {
-            if (favesList[i] == nameToCheck) {
+            if (favesList[i] == (f.name + f.country)) {
                 return true;
             }
         }
@@ -195,11 +194,11 @@ angular.module('starter.services', [])
             return RetrieveFaves();
         },
         exists: function(showToCheck){
-            return ExistsInStorage(showToCheck.name);
+            return ExistsInStorage(showToCheck);
         },
         add: function (newFave) {
-            if (ExistsInStorage(newFave.name)) {
-                RemoveDataFromLocalStorage(newFave.name);
+            if (ExistsInStorage(newFave)) {
+                RemoveDataFromLocalStorage(newFave);
             }
             else {
                 SaveDataToLocalStorage(newFave);
