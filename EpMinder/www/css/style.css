@@ -36,3 +36,7 @@ ion-footer-bar {
   font-size: 1.5em;
   line-height: 40px;
 }
+
+.search {
+    margin-bottom: 5px;
+}
