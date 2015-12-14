@@ -66,17 +66,44 @@ angular.module('starter.services', [])
     episodes = [];
     currentShow = 0;
 
-    function tConvert(time) {
-        // Check correct time format and split into components
-        time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
-        if (time.length > 1) { // If time format correct
-            time = time.slice(1);  // Remove full string match value
-            time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
-            time[0] = +time[0] % 12 || 12; // Adjust hours
+    function ExtractEpisodes(data) {
+        
+        var tempEpisodes = [];
+        for (var i = 0; i < Object.keys(data).length; i++) {
+            tempEpisodes.push(data[i]);
+            tempEpisodes[tempEpisodes.length - 1].summary = data[i].summary.replace("<p>", '').replace("</p>", '').replace("&amp;", '&');
         }
-        return time.join(''); // return adjusted time or original string
+
+        tempEpisodes.sort(function (a, b) {
+            var distanceA = Math.abs(new Date() - new Date(a.airdate));
+            var distanceB = Math.abs(new Date() - new Date(b.airdate));
+
+            return distanceA - distanceB;
+        });
+
+        var previousEpisodes = tempEpisodes.filter(function (e) {
+            return new Date(e.airdate) - new Date() < 0;
+        }).slice(0, 3);
+
+        var newEpisodes = tempEpisodes.filter(function (e) {
+            return new Date(e.airdate) - new Date() > 0;
+        }).slice(0, 3);
+
+        if (previousEpisodes.length > 0) {
+            previousEpisodes.splice(0, 0, { 'name': 'PREVIOUS EPISODE' + (previousEpisodes.length > 1 ? 'S' : '') });
+        }
+        if (newEpisodes.length > 0) {
+            newEpisodes.splice(0, 0, { 'name': 'NEW EPISODE' + (newEpisodes.length > 1 ? 'S' : '') });
+        }
+        else {
+            newEpisodes.splice(0, 0, { 'name': 'NO NEW EPISODES SCHEDULED' });
+        }
+
+        return newEpisodes.concat(previousEpisodes);
+
     }
+    
 
     return {
         all: function () {
@@ -87,6 +114,10 @@ angular.module('starter.services', [])
         },
         DataById: function(id){
             return $http.get('http://api.tvmaze.com/shows/' + id + '/episodes');
+        },
+        process: function (data) {
+            episodes = ExtractEpisodes(data);
+            return episodes;
         },
         byId: function (epId) {
         for (var i = 0; i < episodes.length; i++) {

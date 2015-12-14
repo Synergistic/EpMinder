@@ -35,25 +35,7 @@ angular.module('starter.controllers', [])
                 .success(function (data) 
                 {
                     Episodes.currentShow = $stateParams.show.id;
-     
-                    for (var i = 0; i < Object.keys(data).length; i++) 
-                    {
-                        $scope.episodes.push(data[i]);
-                        //$scope.episodes[$scope.episodes.length - 1].airtime = tConvert(data[i].airtime);
-                        $scope.episodes[$scope.episodes.length - 1].summary = data[i].summary.replace("<p>", '').replace("</p>", '').replace("&amp;", '&');
-                    }
-
-                    $scope.episodes.sort(function (a, b) 
-                    {
-                        return Math.abs(1 - new Date(a.airdate) / new Date()) - Math.abs(1 - new Date(b.airdate) / new Date())
-                    });
-                    $scope.episodes.splice(6, $scope.episodes.length);
-
-                    $scope.episodes.sort(function (a, b) {
-                        return new Date(a.airdate) - new Date(b.airdate);
-                    });
-
-                    Episodes.store($scope.episodes);
+                    $scope.episodes = Episodes.process(data);
                 });
         }
         else {
