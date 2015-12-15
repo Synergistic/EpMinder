@@ -41,3 +41,11 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+epminder/resources/android/icon/drawable-ldpi-icon.png
+EpMinder/config.xml
+EpMinder/package.json
+epminder/resources/android/splash/drawable-land-ldpi-screen.png
+*.png
+EpMinder/config.xml
+*.json
+EpMinder/config.xml
