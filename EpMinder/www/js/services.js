@@ -37,7 +37,7 @@ angular.module('starter.services', [])
         }
 
 
-
+        console.log(showObj.show.status);
 
         return {
             name: newName,
@@ -45,7 +45,8 @@ angular.module('starter.services', [])
             year: newYear,
             country: newCountry,
             network: newNetwork,
-            image: newImage
+            image: newImage,
+            status: showObj.show.status
         };
 
     };
@@ -91,13 +92,13 @@ angular.module('starter.services', [])
         }).slice(0, 3);
 
         if (previousEpisodes.length > 0) {
-            previousEpisodes.splice(0, 0, { 'name': 'PREVIOUS EPISODE' + (previousEpisodes.length > 1 ? 'S' : '') });
+            previousEpisodes.splice(0, 0, { 'name': 'PREVIOUS EPISODE' + (previousEpisodes.length > 1 ? 'S' : ''), 'class': true });
         }
         if (newEpisodes.length > 0) {
-            newEpisodes.splice(0, 0, { 'name': 'NEW EPISODE' + (newEpisodes.length > 1 ? 'S' : '') });
+            newEpisodes.splice(0, 0, { 'name': 'NEW EPISODE' + (newEpisodes.length > 1 ? 'S' : ''), 'class': true });
         }
         else {
-            newEpisodes.splice(0, 0, { 'name': 'NO NEW EPISODES SCHEDULED' });
+            newEpisodes.splice(0, 0, { 'name': 'NO NEW EPISODES SCHEDULED', 'class': true });
         }
 
         return newEpisodes.concat(previousEpisodes);

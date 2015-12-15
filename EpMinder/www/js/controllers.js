@@ -4,10 +4,10 @@ angular.module('starter.controllers', [])
 
     $scope.ViewEpisodes = function (s)
     {
+        $scope.confirmDialog();
         //Called when a show element is clicked
         $state.go("tab.episodes", { show: s });
     };
-
 
     $scope.searchShows = function ()
     {
@@ -28,25 +28,31 @@ angular.module('starter.controllers', [])
 .controller('EpisodesCtrl', function ($scope, $stateParams, Episodes, Favorites) {
 
     $scope.episodes = [];
+    $scope.show = { 'name': 'Episodes' };
+    if ($stateParams.show)
+    {
 
-    if ($stateParams.show) {
-        if (Episodes.currentShow != $stateParams.show.id) {
-            Episodes.DataById($stateParams.show.id)
-                .success(function (data) 
-                {
-                    Episodes.currentShow = $stateParams.show.id;
-                    $scope.episodes = Episodes.process(data);
-                });
+        $scope.show = $stateParams.show;
+        $scope.episodes = Episodes.all();
+
+        if ($stateParams.show.status == "Running")
+        {
+            if (Episodes.currentShow != $stateParams.show.id) {
+                Episodes.DataById($stateParams.show.id)
+                    .success(function (data) {
+                        Episodes.currentShow = $stateParams.show.id;
+                        $scope.episodes = Episodes.process(data);
+                    });
+            }
         }
         else {
-            $scope.episodes = Episodes.all();
+            $scope.episodes = [{ 'name': 'THIS SHOW HAS ENDED', 'class': true }];
         }
     }
 
     $scope.addToFavorites = function () 
     {
         Favorites.add($stateParams.show);
-        //Need to flip star icon to filled and change text to "Remove from Favorites"
     };
 
     $scope.InFavorites = function () {
@@ -60,11 +66,12 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('FavoritesCtrl', function ($scope, $http, $state, Favorites)
+.controller('FavoritesCtrl', function ($scope, $state, Favorites)
 {
     $scope.shows = Favorites.all();
 
     $scope.GetEpisodesForFaves = function (s) {
-        $state.go("tab.episodes", { show: s, quantity: 6 });
+        console.log(s.name);
+        $state.go("tab.episodes", { show: s });
     };
 });

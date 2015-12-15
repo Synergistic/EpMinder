@@ -1,19 +1,19 @@
-<ion-view view-title="Episodes">
+<ion-view view-title="{{show.name}}">
   <ion-content class="padding">
     <ion-list>
-        <ion-item class="item-icon-right" ng-repeat="episode in episodes" type="item-text-wrap" href="#/tab/episodes/{{episode.id}}">
+        <ion-item class="item-icon-right item-text-wrap show-box" ng-class="{'title-box': episode.class }" ng-repeat="episode in episodes">
             <h2>{{episode.name}}</h2>
             <p>{{episode.airdate}}</p>
-            <p>{{episode.showId}}</p>
+            <p>{{episode.summary}}</p>
         </ion-item>
     </ion-list>
   </ion-content>
     <ion-footer-bar align-title="left" class="bar-dark">
         <any ng-if="InFavorites()">
-            <a class="icon favorite ion-android-star" href="#" ng-click="addToFavorites()"></a><span>Remove from Favorites</span>
+            <a class="icon favorite ion-android-star" href="#" ng-click="addToFavorites()"></a><span class="favorite-text">Remove from Favorites</span>
         </any>
         <any ng-if="!InFavorites()">
-            <a class="icon favorite ion-android-star-outline" href="#" ng-click="addToFavorites()"></a><span>Add to Favorites</span>
+            <a class="icon favorite ion-android-star-outline" href="#" ng-click="addToFavorites()"></a><span class="favorite-text">Add to Favorites</span>
         </any>
     </ion-footer-bar>
 </ion-view>

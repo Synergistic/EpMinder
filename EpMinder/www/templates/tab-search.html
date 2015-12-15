@@ -1,19 +1,19 @@
-<ion-view view-title="EpMinder">
+<ion-view view-title="Search">
 
     <ion-content class="padding">
-        <div class="item item-input search">
-            <i class="icon ion-search placeholder-icon"></i>
-            <form class="form-horizontal" role="form" ng-submit="searchShows()">
+        <div class="list list-inset search">
+            <label class="item item-input ">
+                <i class="icon ion-search placeholder-icon"></i>
                 <input type="text" ng-model="searchText" placeholder="Search" id="search">
-            </form>
+            </label>
         </div>
         <ion-list>
-                <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="show in shows" type="item-text-wrap" ng-click="ViewEpisodes(show)">
-                    <img ng-src="{{show.image}}">
-                    <h2>{{show.name}}</h2>
-                    <p>{{show.network}}</p>
-                    <i class="icon ion-chevron-right icon-accessory"></i>
-                </ion-item>
+            <ion-item class="show-box item-avatar item-icon-right" ng-repeat="show in shows" type="item-text-wrap" ng-click="ViewEpisodes(show)">
+                <img ng-src="{{show.image}}">
+                <h2>{{show.name}} ({{show.country}})</h2> 
+                <p>{{show.network}} - {{show.year}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
 </ion-list>
     </ion-content>
 
