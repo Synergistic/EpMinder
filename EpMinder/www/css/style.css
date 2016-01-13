@@ -1,39 +1,39 @@
-/* Empty. Add your own CSS if you like */
+﻿/* Empty. Add your own CSS if you like */
 .item .item-content {
   background-color: black;
 }
 
 ion-nav-view {
-    background-color: black;
+  background-color: black;
 }
 
 .item-content h2 {
-    font-weight: bold;
-    color: white;
+  font-weight: bold;
+  color: white;
 }
 
 .item-content p {
-    color: white;
+  color: white;
 }
+
 .bar {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 .padding {
-    background-color: black;
+  background-color: black;
 }
 
-
-.favorite { 
-    color: orange;
-    top: 15px;
-    left: 15px;
-    font-size: 36px;
-    max-width: 40px;
-    max-height: 40px;
-    width: 100%;
-    border-radius: 4px;
+.favorite {
+  color: orange;
+  top: 15px;
+  left: 15px;
+  font-size: 36px;
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  border-radius: 4px;
 }
 
 .favorite-text {
@@ -42,33 +42,48 @@ ion-nav-view {
 }
 
 .search {
-    margin-bottom: 5px;
-    border-radius: 15px;
-
+  margin-bottom: 5px;
+  border-radius: 15px;
 }
 
 .show-box {
-    margin-bottom: 5px;
-    background-color: #444;
-    border-radius: 10px;
-    border: 2px solid white;
+  margin-bottom: 5px;
+  background-color: #444;
+  border-radius: 10px;
+  border: 2px solid white;
 }
-.show-box h2 {
-    color: white;
-    font-weight: bold;
 
+.show-box h2 {
+  color: white;
+  font-weight: bold;
 }
 
 .show-box p {
-    color: white;
+  color: white;
 }
 
-.title-box h2 { 
-
-    color: #22A7F0;
-    font-family: "Arial";
-    font-style: italic;
-    font-weight: bold;
-
-
+.title-box h2 {
+  color: #22A7F0;
+  font-family: "Arial";
+  font-style: italic;
+  font-weight: bold;
 }
+
+.foot {
+  background-color: black;
+  border-top: 4px solid white;
+}
+
+.tab-bar {
+  background-color: #11c1f3;
+  color: pink;
+  color: red;
+}
+
+ion-tabs {
+  background-color: red;
+  color: orange;
+  border-color: pink;
+}
+
+/*# sourceMappingURL=style.css.map */

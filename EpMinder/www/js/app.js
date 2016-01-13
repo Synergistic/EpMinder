@@ -81,7 +81,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'FavoritesCtrl'
       }
     }
-  });
+  })
+    .state('tab.week', {
+        url: '/week',
+        cache: false,
+        views: {
+            'tab-week': {
+                templateUrl: 'templates/tab-week.html',
+                controller: 'WeekCtrl'
+            }
+        }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/search');

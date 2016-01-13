@@ -36,9 +36,6 @@ angular.module('starter.services', [])
             newCountry = showObj.show.webChannel.country.code;
         }
 
-
-        console.log(showObj.show.status);
-
         return {
             name: newName,
             id: showObj.show.id,
@@ -67,6 +64,26 @@ angular.module('starter.services', [])
     episodes = [];
     currentShow = 0;
 
+    Date.prototype.addDays = function (days) {
+        var dat = new Date(this.valueOf())
+        dat.setDate(dat.getDate() + days);
+        return dat;
+    }
+
+    function GetThisWeek(data) {
+        tempEpisodes = [];
+        for (var i = 0; i < Object.keys(data).length; i++) {
+            tempEpisodes.push(data[i]);
+            tempEpisodes[tempEpisodes.length - 1].summary = data[i].summary.replace("<p>", '').replace("</p>", '').replace("&amp;", '&');
+            tempEpisodes[tempEpisodes.length - 1].showname = data[i].url.split('/')[5].split(/[0-9]/)[0].toUpperCase().replace("-", ' ').replace("-", ' ');
+        }
+
+        var nextWeekEpisodes = tempEpisodes.filter(function (e) {
+
+            return (new Date(e.airdate) - new Date().addDays(-1)) > 0 && (new Date(e.airdate) - new Date().addDays(7) < 0);
+        });
+        return nextWeekEpisodes;
+    }
 
     function ExtractEpisodes(data) {
         
@@ -84,11 +101,11 @@ angular.module('starter.services', [])
         });
 
         var previousEpisodes = tempEpisodes.filter(function (e) {
-            return new Date(e.airdate) - new Date() < 0;
+            return new Date(e.airdate) - new Date().addDays(-1) < 0;
         }).slice(0, 3);
 
         var newEpisodes = tempEpisodes.filter(function (e) {
-            return new Date(e.airdate) - new Date() > 0;
+            return new Date(e.airdate) - new Date().addDays(-1) > 0;
         }).slice(0, 3);
 
         if (previousEpisodes.length > 0) {
@@ -118,6 +135,10 @@ angular.module('starter.services', [])
         },
         process: function (data) {
             episodes = ExtractEpisodes(data);
+            return episodes;
+        },
+        getWeek: function (data) {
+            episodes = GetThisWeek(data);
             return episodes;
         },
         byId: function (epId) {

@@ -2,10 +2,14 @@
 
     <ion-content class="padding">
         <div class="list list-inset search">
-            <label class="item item-input ">
-                <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" ng-model="searchText" placeholder="Search" id="search">
-            </label>
+            <form ng-submit="searchShows()">
+                <label class="item item-input ">
+                    <i class="icon ion-search placeholder-icon"></i>
+
+                    <input type="text" ng-model="searchText" placeholder="Search" id="search">
+
+                </label>
+            </form>
         </div>
         <ion-list>
             <ion-item class="show-box item-avatar item-icon-right" ng-repeat="show in shows" type="item-text-wrap" ng-click="ViewEpisodes(show)">

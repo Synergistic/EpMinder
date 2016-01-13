@@ -1,0 +1,12 @@
+<ion-view view-title="This Week">
+  <ion-content class="padding">
+    <ion-list>
+        <ion-item class="item-icon-right item-text-wrap show-box" ng-repeat="episode in episodes">
+            <h2>{{episode.showname}}</h2>
+            <h2>{{episode.name}}</h2>
+            <p>{{episode.airdate}}</p>
+            <p>{{episode.summary}}</p>
+        </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

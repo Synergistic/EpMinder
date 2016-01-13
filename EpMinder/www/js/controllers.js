@@ -4,7 +4,6 @@ angular.module('starter.controllers', [])
 
     $scope.ViewEpisodes = function (s)
     {
-        $scope.confirmDialog();
         //Called when a show element is clicked
         $state.go("tab.episodes", { show: s });
     };
@@ -28,19 +27,22 @@ angular.module('starter.controllers', [])
 .controller('EpisodesCtrl', function ($scope, $stateParams, Episodes, Favorites) {
 
     $scope.episodes = [];
+
     $scope.show = { 'name': 'Episodes' };
+    console.log("StateParams" + $stateParams.show.name);
     if ($stateParams.show)
     {
 
         $scope.show = $stateParams.show;
+        $stateParams.show = null;
         $scope.episodes = Episodes.all();
 
-        if ($stateParams.show.status == "Running")
+        if ($scope.show.status == "Running")
         {
-            if (Episodes.currentShow != $stateParams.show.id) {
-                Episodes.DataById($stateParams.show.id)
+            if (Episodes.currentShow != $scope.show.id) {
+                Episodes.DataById($scope.show.id)
                     .success(function (data) {
-                        Episodes.currentShow = $stateParams.show.id;
+                        Episodes.currentShow = $scope.show.id;
                         $scope.episodes = Episodes.process(data);
                     });
             }
@@ -52,11 +54,11 @@ angular.module('starter.controllers', [])
 
     $scope.addToFavorites = function () 
     {
-        Favorites.add($stateParams.show);
+        Favorites.add($scope.show);
     };
 
     $scope.InFavorites = function () {
-        return Favorites.exists($stateParams.show);
+        return Favorites.exists($scope.show);
     };
 })
 
@@ -71,7 +73,31 @@ angular.module('starter.controllers', [])
     $scope.shows = Favorites.all();
 
     $scope.GetEpisodesForFaves = function (s) {
-        console.log(s.name);
         $state.go("tab.episodes", { show: s });
     };
+})
+
+.controller('WeekCtrl', function ($scope, $state, Episodes, Favorites) {
+    $scope.shows = Favorites.all();
+    $scope.episodes = [];
+
+    for (var i = 0; i < $scope.shows.length; i++) {
+        if ($scope.shows[i].status == "Running")
+        {
+            
+            showname = $scope.shows[i].name;
+            Episodes.DataById($scope.shows[i].id)
+                    .success(function (data) {
+                        eps = Episodes.getWeek(data);
+                        for (var j = 0; j < eps.length; j++) {
+                            $scope.episodes.push(eps[j]);
+                        }
+                        
+                    });
+
+        }
+
+
+    };
+
 });
