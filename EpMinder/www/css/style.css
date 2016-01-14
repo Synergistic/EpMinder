@@ -36,6 +36,21 @@ ion-nav-view {
   border-radius: 4px;
 }
 
+.share {
+  color: white;
+  margin-top: -5px;
+  font-size: 48px;
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.share-text {
+  margin-top: 8px;
+  font-size: 250%;
+}
+
 .favorite-text {
   height: 120px;
   font-size: 200%;

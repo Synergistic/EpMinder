@@ -49,3 +49,7 @@ epminder/resources/android/splash/drawable-land-ldpi-screen.png
 EpMinder/config.xml
 *.json
 EpMinder/config.xml
+ConsoleApplication1/ConsoleApplication1.sln
+ConsoleApplication1/ConsoleApplication1/bin/Debug/ConsoleApplication1.exe.config
+ConsoleApplication1/ConsoleApplication1/obj/Debug/ConsoleApplication1.csproj.FileListAbsolute.txt
+ConsoleApplication1/ConsoleApplication1/Properties/AssemblyInfo.cs

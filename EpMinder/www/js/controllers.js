@@ -68,20 +68,41 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('FavoritesCtrl', function ($scope, $state, Favorites)
+.controller('FavoritesCtrl', function ($scope, $state, Favorites, $cordovaSocialSharing)
 {
     $scope.shows = Favorites.all();
 
     $scope.GetEpisodesForFaves = function (s) {
         $state.go("tab.episodes", { show: s });
     };
+    
+    GetListOfFaves = function () {
+        var faves = '';
+        for (var i = 0; i < $scope.shows.length; i++) {
+            faves += '-';
+            faves += $scope.shows[i].name;
+            faves += '\n';
+        }
+        return faves;
+    };
+
+    $scope.share = function () {
+        //window.plugins.socialsharing.share('This is my message', 'Subject string', "www/img/ionic.png", 'http://www.mylink.com');
+        $cordovaSocialSharing.share(GetListOfFaves(), 'Subject string', null, null);
+    }
 })
 
 .controller('WeekCtrl', function ($scope, $state, Episodes, Favorites) {
+    $scope.sumHidden = [];
     $scope.shows = Favorites.all();
     $scope.episodes = [];
 
-    for (var i = 0; i < $scope.shows.length; i++) {
+    $scope.ShowSummary = function (index) {
+        $scope.sumHidden[index] = false;
+    };
+
+    for (var i = 0; i < $scope.shows.length; i++)
+    {
         if ($scope.shows[i].status == "Running")
         {
             
@@ -91,6 +112,8 @@ angular.module('starter.controllers', [])
                         eps = Episodes.getWeek(data);
                         for (var j = 0; j < eps.length; j++) {
                             $scope.episodes.push(eps[j]);
+                            eps[j].index = $scope.episodes.length - 1;
+                            $scope.sumHidden.push(true)
                         }
                         
                     });
@@ -99,5 +122,4 @@ angular.module('starter.controllers', [])
 
 
     };
-
 });

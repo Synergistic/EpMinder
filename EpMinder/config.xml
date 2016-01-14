@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.epminder726451" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ionicframework.epminder726451" version="0.0.2" android-versionCode="19" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>epminder</name>
   <description>&#xD;
-        An Ionic Framework and Cordova project.&#xD;
+        A reminder for all those tv shows.&#xD;
     </description>
-  <author email="you@example.com" href="http://example.com.com/">&#xD;
-      Your Name Here&#xD;
+  <author email="synergy.harm@gmail.com" href="http://www.nutritionbud.com/">&#xD;
+      Dan Fernandez&#xD;
     </author>
   <content src="index.html"/>
   <access origin="*"/>

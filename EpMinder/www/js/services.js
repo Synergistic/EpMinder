@@ -101,9 +101,8 @@ angular.module('starter.services', [])
             var distanceA = Math.abs(new Date() - new Date(a.airdate));
             var distanceB = Math.abs(new Date() - new Date(b.airdate));
 
-            return distanceA - distanceB;
+            return distanceB - distanceA;
         });
-
         return nextWeekEpisodes;
     }
 

@@ -5,7 +5,11 @@
             <h2>{{episode.showname}}</h2>
             <h2>{{episode.name}}</h2>
             <p>{{episode.airdate}} @ {{episode.airtime}}</p>
-            <p>{{episode.summary}}</p>
+
+            <div ng-hide="sumHidden[episode.index]" class="ng-hide"><p>{{episode.summary}}</p></div>
+            <button ng-hide="!sumHidden[episode.index]" class="ng-hide button button-stable" ng-click="ShowSummary(episode.index)">
+                show synopsis
+            </button>
         </ion-item>
     </ion-list>
   </ion-content>
