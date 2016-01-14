@@ -1,15 +1,18 @@
 <ion-view view-title="This Week">
   <ion-content class="padding">
+      <div ng-hide="isLoaded" class="spinner-area">
+          <ion-spinner icon="android" class="spinner"></ion-spinner>
+      </div>
     <ion-list>
         <ion-item class="item-icon-right item-text-wrap show-box" ng-repeat="episode in episodes">
             <h2>{{episode.showname}}</h2>
-            <h2>{{episode.name}}</h2>
+            <h3>{{episode.name}}</h3>
             <p>{{episode.airdate}} @ {{episode.airtime}}</p>
 
-            <div ng-hide="sumHidden[episode.index]" class="ng-hide"><p>{{episode.summary}}</p></div>
-            <button ng-hide="!sumHidden[episode.index]" class="ng-hide button button-stable" ng-click="ShowSummary(episode.index)">
+            <!--<div ng-hide="sumHidden[$index]" class="ng-hide"><p>{{episode.summary}}</p></div>
+            <button ng-hide="!sumHidden[$index]" class="ng-hide button button-stable" ng-click="ShowSummary($index)">
                 show synopsis
-            </button>
+            </button>-->
         </ion-item>
     </ion-list>
   </ion-content>

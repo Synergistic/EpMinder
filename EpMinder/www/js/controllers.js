@@ -2,6 +2,8 @@ angular.module('starter.controllers', [])
 
 .controller('SearchCtrl', function ($scope, $state, Shows) {
 
+    $scope.isFound = true;
+
     $scope.ViewEpisodes = function (s)
     {
         //Called when a show element is clicked
@@ -10,17 +12,20 @@ angular.module('starter.controllers', [])
 
     $scope.searchShows = function ()
     {
+        $scope.shows = [];
+        $scope.isFound = false;
         //Called when 'enter' hit on search box
         Shows.search($("#search").val())
-            .success(function (data)
-            {
+            .success(function (data) {
+                
                 $scope.shows = [];
-                for (var i = 0; i < Object.keys(data).length; i++)
-                {
+                for (var i = 0; i < Object.keys(data).length; i++) {
                     $scope.shows.push(Shows.process(data[i]));
                 }
+            }).then(function () {
+                $scope.isFound = true;
             });
-
+        
         document.activeElement.blur();
     };
 })
@@ -29,7 +34,6 @@ angular.module('starter.controllers', [])
     $scope.episodes = [];
 
     $scope.show = { 'name': 'Episodes' };
-    console.log("StateParams" + $stateParams.show.name);
     if ($stateParams.show)
     {
 
@@ -93,33 +97,23 @@ angular.module('starter.controllers', [])
 })
 
 .controller('WeekCtrl', function ($scope, $state, Episodes, Favorites) {
-    $scope.sumHidden = [];
+
     $scope.shows = Favorites.all();
+    $scope.sumHidden = [];
+    var count = 100;
+    for (var i = 0; i < count; i++) {
+        $scope.sumHidden.push(true);
+    }
+
     $scope.episodes = [];
+    $scope.isLoaded = false;
+    
 
     $scope.ShowSummary = function (index) {
         $scope.sumHidden[index] = false;
     };
 
-    for (var i = 0; i < $scope.shows.length; i++)
-    {
-        if ($scope.shows[i].status == "Running")
-        {
-            
-            showname = $scope.shows[i].name;
-            Episodes.DataById($scope.shows[i].id)
-                    .success(function (data) {
-                        eps = Episodes.getWeek(data);
-                        for (var j = 0; j < eps.length; j++) {
-                            $scope.episodes.push(eps[j]);
-                            eps[j].index = $scope.episodes.length - 1;
-                            $scope.sumHidden.push(true)
-                        }
-                        
-                    });
+    $scope.episodes = Episodes.getWeek($scope.shows)
 
-        }
-
-
-    };
+    $scope.isLoaded = true;
 });

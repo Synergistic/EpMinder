@@ -11,6 +11,9 @@
                 </label>
             </form>
         </div>
+        <div ng-hide="isFound" class="spinner-area">
+            <ion-spinner icon="android" class="spinner-energized"></ion-spinner>
+        </div>
         <ion-list>
             <ion-item class="show-box item-avatar item-icon-right" ng-repeat="show in shows" type="item-text-wrap" ng-click="ViewEpisodes(show)">
                 <img ng-src="{{show.image}}">

@@ -97,12 +97,6 @@ angular.module('starter.services', [])
             return (new Date(e.airdate) - new Date().addDays(-1)) > 0 && (new Date(e.airdate) - new Date().addDays(7) < 0);
         });
 
-        nextWeekEpisodes.sort(function (a, b) {
-            var distanceA = Math.abs(new Date() - new Date(a.airdate));
-            var distanceB = Math.abs(new Date() - new Date(b.airdate));
-
-            return distanceB - distanceA;
-        });
         return nextWeekEpisodes;
     }
 
@@ -158,9 +152,37 @@ angular.module('starter.services', [])
             episodes = ExtractEpisodes(data);
             return episodes;
         },
-        getWeek: function (data) {
-            episodes = GetThisWeek(data);
-            return episodes;
+        getWeek: function (shows) {
+            eps = []
+            for (var i = 0; i < shows.length; i++) {
+                if (shows[i].status == "Running") {
+
+                    showname = shows[i].name;
+                    this.DataById(shows[i].id)
+                            .success(function (data) {
+                                e = GetThisWeek(data)
+                                for (var j = 0; j < e.length; j++) {
+                                    eps.push(e[j]);
+                                }
+
+                            }).then(function(){
+                                eps.sort(function (a, b) {
+                                    var distanceA = Math.abs(new Date() - new Date(a.airdate));
+                                    var distanceB = Math.abs(new Date() - new Date(b.airdate));
+
+                                    return distanceA - distanceB;
+                                });
+                            }).finally(function(){
+                                for (var i = 0; i < eps.length; i++) {
+                                    eps[i].index = i;
+                                }});
+                }
+
+            };
+
+            return eps;
+
+
         },
         byId: function (epId) {
         for (var i = 0; i < episodes.length; i++) {

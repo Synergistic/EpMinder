@@ -14,6 +14,7 @@ ion-nav-view {
     color: white;
 }
 
+
 .item-content p {
     color: white;
 }
@@ -26,7 +27,16 @@ ion-nav-view {
     background-color: black;
 }
 
-
+.spinner svg {
+  width: 150px;
+  height: 150px;
+  stroke: #22A7F0;
+  fill: white;
+}
+.spinner-area {
+    text-align: center;
+    margin-top: 10%;
+}
 .favorite { 
     color: orange;
     top: 15px;
@@ -75,7 +85,11 @@ ion-nav-view {
     font-weight: bold;
 
 }
+.show-box h3 {
+    color: white;
 
+
+}
 .show-box p {
     color: white;
 }
