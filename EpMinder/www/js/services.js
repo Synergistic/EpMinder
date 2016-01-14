@@ -70,18 +70,40 @@ angular.module('starter.services', [])
         return dat;
     }
 
+    function tConvert(time) {
+        // Check correct time format and split into components
+        time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+        if (time.length > 1) { // If time format correct
+            time = time.slice(1);  // Remove full string match value
+            time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+            time[0] = +time[0] % 12 || 12; // Adjust hours
+        }
+        return time.join(''); // return adjusted time or original string
+    }
+
+
     function GetThisWeek(data) {
         tempEpisodes = [];
         for (var i = 0; i < Object.keys(data).length; i++) {
             tempEpisodes.push(data[i]);
             tempEpisodes[tempEpisodes.length - 1].summary = data[i].summary.replace("<p>", '').replace("</p>", '').replace("&amp;", '&');
-            tempEpisodes[tempEpisodes.length - 1].showname = data[i].url.split('/')[5].split(/[0-9]/)[0].toUpperCase().replace("-", ' ').replace("-", ' ');
+            tempEpisodes[tempEpisodes.length - 1].airtime = tConvert(tempEpisodes[tempEpisodes.length - 1].airtime);
+            tempEpisodes[tempEpisodes.length - 1].showname = data[i].url.split('/')[5].split(/[0-9]/)[0].toUpperCase().replace(/-/g, ' ');
         }
 
         var nextWeekEpisodes = tempEpisodes.filter(function (e) {
 
             return (new Date(e.airdate) - new Date().addDays(-1)) > 0 && (new Date(e.airdate) - new Date().addDays(7) < 0);
         });
+
+        nextWeekEpisodes.sort(function (a, b) {
+            var distanceA = Math.abs(new Date() - new Date(a.airdate));
+            var distanceB = Math.abs(new Date() - new Date(b.airdate));
+
+            return distanceA - distanceB;
+        });
+
         return nextWeekEpisodes;
     }
 
